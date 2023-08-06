@@ -12,7 +12,7 @@ const ITEMS_PER_PAGE = 12;
 function App() {
   const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState(null); 
   const [query, setQuery] = useState('');
   const [page, setPage] = useState(1);
   const [showModal, setShowModal] = useState(false);
@@ -21,6 +21,9 @@ function App() {
 
   useEffect(() => {
     if (query === '' || page === 0) return;
+
+    setLoading(true);
+    setError(null);
 
     fetchImages(query, page)
       .then((response) => {
@@ -56,6 +59,7 @@ function App() {
       <Searchbar onSubmit={handleSearchSubmit} />
       <ImageGallery images={images} onImageClick={setLargeImageUrl} />
       {loading && <Loader />}
+      {error && <p className={styles.Error}>{error}</p>}
       {images.length > 0 && !loading && images.length < totalHits && <Button onClick={handleLoadMore} />}
       {showModal && <Modal largeImageUrl={largeImageUrl} onClose={() => setShowModal(false)} />}
     </div>
