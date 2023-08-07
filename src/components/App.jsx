@@ -28,7 +28,7 @@ function App() {
       .then((response) => {
         const totalHits = response.data.totalHits;
         setImages((prevImages) =>
-          page === 1 ? response.data.hits : [...prevImages, ...response.data.hits]
+          [...prevImages, ...response.data.hits]
         );
         setTotalHits(totalHits);
         setLoading(false);
@@ -106,7 +106,7 @@ export default App;
 //       .then((response) => {
 //         const totalHits = response.data.totalHits;
 //         setImages((prevImages) =>
-//           [...prevImages, ...response.data.hits]
+//           page === 1 ? response.data.hits : [...prevImages, ...response.data.hits]
 //         );
 //         setTotalHits(totalHits);
 //         setLoading(false);
